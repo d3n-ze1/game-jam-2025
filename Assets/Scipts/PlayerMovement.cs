@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.GetType());
         isGrounded = true;
         animator.SetBool("isJumping", !isGrounded);
     }
@@ -79,5 +78,14 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         isGrounded = false;
         animator.SetBool("isJumping", !isGrounded);
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            Destroy(gameObject);
+        }
     }
 }
